@@ -8,7 +8,7 @@ const CONFIG = {
     name: 'DarkRoot',
     fullName: 'DarkRoot Organizations',
     tagline: 'Building the future with AI',
-    email: 'contact@darkroot.dev',
+    email: 'davidstha900@gmail.com',
     location: 'Remote-first · Worldwide',
     discord: 'https://discord.gg/darkroot',
     github: 'https://github.com/darkrootiding-hub',
@@ -80,9 +80,6 @@ const CONFIG = {
 
   team: [
     { name: 'David Shrestha', role: 'Founder & CEO', photo: 'assets/team/member1.jpg', skills: [{n:'Leadership',v:96},{n:'Strategy',v:90}], socials: { github: '#', linkedin: '#', x: '#' } },
-    { name: 'Nischal Neupane', role: 'DatkRoot M.D', photo: 'assets/team/member2.jpg', skills: [{n:'Prompt Engineering Learning',v:94},{n:'Python',v:92}], socials: { github: '#', linkedin: '#', x: '#' } },
-    { name: 'Manish Aryal', role: 'Head of Design', photo: 'assets/team/member3.jpg', skills: [{n:'UI/UX',v:95},{n:'Motion Design',v:88}], socials: { github: '#', linkedin: '#', x: '#' } },
-    { name: 'Susil Nesur', role: 'Tester', photo: 'assets/team/member4.jpg', skills: [{n:'App Testing',v:93},{n:'Web Testing',v:90}], socials: { github: '#', linkedin: '#', x: '#' } },
      ],
 
   techStack: [
