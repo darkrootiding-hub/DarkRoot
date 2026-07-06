@@ -494,15 +494,37 @@ function initCareers() {
     }
   });
 
-  document.getElementById('apply-form').addEventListener('submit', (e) => {
+  const applyForm = document.getElementById('apply-form');
+  applyForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    // NOTE: this only shows a success state. To actually receive applications,
-    // wire this up to a service like Formspree, or your own API endpoint.
-    document.getElementById('apply-success').classList.add('show');
-    e.target.reset();
-    fileDrop.classList.remove('has-file');
-    fileDrop.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Click to upload your resume (PDF)`;
-    setTimeout(() => document.getElementById('apply-success').classList.remove('show'), 4000);
+    const submitBtn = applyForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Submitting…';
+    submitBtn.disabled = true;
+
+    fetch('https://formspree.io/f/xlgyvrpe', {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: new FormData(applyForm),
+    })
+      .then((res) => {
+        if (res.ok) {
+          document.getElementById('apply-success').classList.add('show');
+          applyForm.reset();
+          fileDrop.classList.remove('has-file');
+          fileDrop.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Click to upload your resume (PDF)`;
+          setTimeout(() => document.getElementById('apply-success').classList.remove('show'), 4000);
+        } else {
+          alert('Something went wrong submitting your application. Please try again.');
+        }
+      })
+      .catch(() => {
+        alert('Network error — please check your connection and try again.');
+      })
+      .finally(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      });
   });
 }
 
@@ -577,10 +599,34 @@ function initContact() {
 
     if (!valid) return;
 
-    // NOTE: shows a success state only. Wire this to Formspree/Resend/your API to deliver messages.
-    document.getElementById('form-success').classList.add('show');
-    form.reset();
-    setTimeout(() => document.getElementById('form-success').classList.remove('show'), 4000);
+    // Submits to your Formspree endpoint.
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending…';
+    submitBtn.disabled = true;
+
+    fetch('https://formspree.io/f/xlgyvrpe', {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: new FormData(form),
+    })
+      .then((res) => {
+        if (res.ok) {
+          document.getElementById('form-success').classList.add('show');
+          form.reset();
+          ['name', 'email', 'message'].forEach((key) => document.getElementById(`field-${key}`).classList.remove('active'));
+          setTimeout(() => document.getElementById('form-success').classList.remove('show'), 4000);
+        } else {
+          setError('message', 'Something went wrong sending your message. Please try again.');
+        }
+      })
+      .catch(() => {
+        setError('message', 'Network error — please check your connection and try again.');
+      })
+      .finally(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      });
   });
 }
 
@@ -602,13 +648,34 @@ function initFooter() {
   document.getElementById('newsletter-btn').addEventListener('click', (e) => {
     e.preventDefault();
     const input = document.getElementById('newsletter-input');
-    if (!input.value.trim()) return;
-    // NOTE: connect this to a real newsletter provider (Mailchimp, Buttondown, etc.)
-    input.value = '';
+    const email = input.value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+
     const btn = e.target;
     const original = btn.textContent;
-    btn.textContent = 'Subscribed ✓';
-    setTimeout(() => (btn.textContent = original), 2500);
+    btn.textContent = 'Subscribing…';
+    btn.disabled = true;
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('_subject', 'New newsletter signup — DarkRoot');
+
+    fetch('https://formspree.io/f/xlgyvrpe', {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: formData,
+    })
+      .then((res) => {
+        btn.textContent = res.ok ? 'Subscribed ✓' : 'Try again';
+        if (res.ok) input.value = '';
+      })
+      .catch(() => {
+        btn.textContent = 'Try again';
+      })
+      .finally(() => {
+        btn.disabled = false;
+        setTimeout(() => (btn.textContent = original), 2500);
+      });
   });
 }
 
