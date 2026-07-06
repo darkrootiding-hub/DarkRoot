@@ -1,111 +1,113 @@
-# DarkRoot Portfolio — David Stha
+# DarkRoot Organizations — Website (No Build Step)
 
-A premium, futuristic, config-driven portfolio built with React, Vite, TypeScript, Tailwind CSS, Framer Motion, React Three Fiber, and GSAP.
+An ultra-premium, cyber-tech website for DarkRoot Organizations, built with
+**plain HTML, CSS, and JavaScript** — no React, no npm, no build step. Runs
+directly in a browser, or in **HopWeb** on Android, by opening `index.html`.
 
-## Getting started
+The 3D hero (a neural-network core) uses Three.js loaded from a CDN
+`<script>` tag, and icons come from Font Awesome's CDN — both still work
+with zero local build tooling, since they're just `<script>`/`<link>` tags.
 
-```bash
-npm install
-npm run dev
-```
+## Using this in HopWeb
 
-Then open the printed local URL (usually `http://localhost:5173`).
+1. Unzip this project on your phone (or clone it after pushing to GitHub —
+   HopWeb has Git support built in).
+2. Open the project folder in HopWeb.
+3. Tap `index.html` and use HopWeb's preview/run button.
+4. Edit any file directly in HopWeb; save and re-run to see changes.
 
-To build for production:
-
-```bash
-npm run build
-npm run preview
-```
+**Note:** the hero animation and icons load from CDNs
+(`cdnjs.cloudflare.com`, Google Fonts), so the first load needs an internet
+connection. The browser caches them after that.
 
 ## Editing your content
 
-Everything on the site — your name, bio, titles, skills, projects, experience,
-certifications, services, testimonials, blog posts, and social links — comes
-from **one file**:
+Everything on the site — brand info, hero copy, mission/vision/values,
+timeline, stats, departments, projects, team members, tech stack, gallery
+images, careers content, FAQ, and contact/social links — comes from **one
+file**:
 
 ```
-src/data/config.ts
+js/config.js
 ```
 
-Edit that file and the whole site updates automatically. No component code
-needs to change for content updates. Replace the placeholder images/PDF in
-`public/` (avatar, project thumbnails, testimonial photos, resume.pdf) with
-your real assets — the filenames already match what `config.ts` expects.
+Edit it, save, and refresh. Replace the placeholder images in `assets/`
+(team photos, project thumbnails, gallery images) with your real files —
+keep the same filenames, or update the paths in `config.js` to match.
+
+## Publishing to your GitHub repo
+
+This project is already a git repository with a commit ready to push.
+
+From HopWeb (Git support built in):
+1. Connect it to `https://github.com/darkrootiding-hub/DarkRoot`
+2. Push your changes via HopWeb's Git panel.
+
+From a computer:
+```bash
+git remote add origin https://github.com/darkrootiding-hub/DarkRoot.git
+git branch -M main
+git push -u origin main
+```
+
+## Hosting it live (free) — GitHub Pages
+
+1. On GitHub: repo → **Settings → Pages**
+2. Source: `main` branch, `/ (root)` folder → Save
+3. You'll get a live URL like `https://darkrootiding-hub.github.io/DarkRoot/`
 
 ## What's implemented
 
-- **Hero**: fullscreen 3D scene (signature glowing "root network" core, built
-  with React Three Fiber + postprocessing bloom), typing effect over your
-  titles, magnetic CTA buttons, animated gradient name.
-- **3D scene** (`RootScene.tsx`): mouse-reactive rotating core, procedurally
-  generated branching root lines, holographic rings, particle field, grid
-  floor, bloom + vignette postprocessing.
-- **Navigation**: glass sticky navbar, scroll progress bar, active-section
-  pill indicator, animated mobile menu, `Ctrl/Cmd+K` command palette that can
-  jump to sections, open projects, or open socials.
-- **About**: bio panel, animated stat counters, highlight cards.
-- **Skills**: circular animated progress rings, category filter, live search,
-  tilt-on-hover cards.
-- **Projects**: tag filtering, search, "load more" pagination, tilt cards,
-  and a live preview modal with GitHub/demo links.
-- **Experience/Timeline**: glowing animated vertical line with expandable
-  milestones (education, experience, certifications, awards).
-- **Certifications**, **Services**, **Testimonials** (carousel), **Blog**
-  (card grid) — all config-driven.
-- **Contact**: floating-label form with validation and an animated success
-  state, copy-to-clipboard email, social links.
-- **Extras**: cinematic loading screen, custom cursor with magnetic glow,
-  noise-texture overlay, aurora/gradient background layers, Lenis smooth
-  scrolling, scroll-reveal animations throughout, a floating AI-assistant
-  widget shell (UI only — see below), dark theme, PWA manifest.
+- Loading screen with glitch text, scanning light, percentage counter
+- Custom glowing cursor with magnetic hover state
+- Living background: animated grid overlay, aurora gradient, mesh glow,
+  noise texture
+- Floating glass navbar with active-section indicator, scroll progress bar,
+  animated mobile menu
+- Fullscreen hero with a 3D neural-network core (Three.js), floating
+  icons, scanlines, animated scroll indicator
+- About: mission/vision cards, values, animated timeline, animated stat
+  counters
+- Departments: 10 department cards with 3D tilt and hover particle-glow
+- Projects: image zoom on hover, tag filtering via tags shown per card,
+  GitHub/demo buttons, full preview modal
+- Team: glass cards with 3D tilt, animated skill bars, social links
+- Tech stack: hover-glow chip grid
+- Gallery: Pinterest-style masonry layout with hover lift/shine
+- Careers: hiring-process timeline, benefits grid, open positions, and an
+  application form with resume-upload UI
+- FAQ: animated glass accordion
+- Contact: form with floating labels + validation, animated success state,
+  and a lightweight canvas-based "network map" (no map API key required)
+- Footer: newsletter input, social links, back-to-top button
+- 3D tilt effects on cards, scroll-reveal animations throughout, dark
+  cyber-tech theme (black / neon blue / neon purple), fully responsive
 
 ## What's intentionally simplified (and why)
 
-A few items from a full Awwwards-tier spec need infrastructure this static
-front-end can't provide on its own. They're scaffolded so you can wire them
-up:
+Static sites can't run server code, so a few pieces are UI-complete but
+need a backend or third-party service to be fully functional:
 
-- **AI assistant widget** (`AssistantWidget.tsx`) — the UI is complete and
-  functional, but responses are placeholder text. Connect it to an LLM API
-  (OpenAI, Anthropic, etc.) inside `handleSend`.
-- **Contact form submission** — validates and shows a success state, but
-  doesn't send email yet. Wire it to a service like Formspree, Resend, or
-  your own API route inside `handleSubmit` in `Contact.tsx`.
-- **GitHub contribution graph / visitor counter** — both need a backend or
-  third-party API (e.g. GitHub's GraphQL API, or a hit-counter service) and
-  were left out to avoid baking in a specific vendor. Easiest path: embed a
-  service like `github-readme-stats` as an image, or call the GitHub REST
-  API client-side.
-- **True offline support / service worker** — the manifest is in place for
-  PWA installability; add `vite-plugin-pwa` if you want full offline caching.
-- **Video preview inside project modal** — the modal supports an image today;
-  swap the `<img>` for a `<video>` tag per-project if you have demo clips.
+- **Contact form & application form** — both validate and show a success
+  state, but don't deliver anywhere yet. Point them at a service like
+  [Formspree](https://formspree.io) or [Web3Forms](https://web3forms.com)
+  (just set the form's `action` — no server code needed), or wire up
+  `fetch()` calls in `js/main.js` to your own API.
+- **Resume upload** — the UI accepts a PDF and shows the filename, but
+  doesn't upload anywhere. Formspree and similar services support file
+  uploads directly from static forms if you want this working end-to-end.
+- **Newsletter subscribe** — UI only. Connect to Mailchimp, Buttondown, or
+  similar in `initFooter()`.
+- **Contact map** — uses a lightweight canvas animation instead of a real
+  map (Google Maps/Mapbox require an API key and usage limits). Swap in an
+  `<iframe>` embed if you want an actual map.
 
-## Project structure
+## File structure
 
 ```
-src/
-  components/     All UI sections & widgets
-  data/config.ts  Single source of truth for content
-  hooks/          useLenis (smooth scroll), scroll-progress/active-section
-  index.css       Design tokens, glass utilities, accessibility helpers
-  App.tsx         Composes the page
+index.html       The whole page
+css/style.css     All styles (design tokens at the top)
+js/config.js      Single source of truth for all content
+js/main.js        All behavior/interactivity + the 3D hero scene
+assets/           Images (team, projects, gallery), favicon
 ```
-
-## Design tokens
-
-Colors, fonts, and animation keyframes are defined in `tailwind.config.js`
-under `theme.extend` — change the `violet`/`cyan`/`void` values there to
-retheme the whole site.
-
-## Accessibility & performance notes
-
-- Respects `prefers-reduced-motion` (disables Lenis smoothing and shortens
-  animations).
-- Visible focus rings on all interactive elements.
-- Images use `loading="lazy"` with skeleton placeholders.
-- Heavy libraries (three.js, framer-motion, gsap, lenis) are split into
-  separate chunks in `vite.config.ts` for better caching.
-- Replace placeholder images in `public/` with optimized real assets (WebP/AVIF
-  recommended) before shipping to keep Lighthouse scores high.

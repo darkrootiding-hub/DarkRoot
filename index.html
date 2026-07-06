@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050505" />
+  <title>DarkRoot Organizations — Building the Future with AI</title>
+  <meta name="description" content="DarkRoot Organizations designs and ships intelligent software — AI research, engineering, and design for teams who refuse to build something ordinary." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- CDN libraries — no build step required -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+</head>
+<body>
+
+  <div id="loading-screen">
+    <div class="loading-scan"></div>
+    <div class="loading-logo">DARK<span class="text-gradient">ROOT</span></div>
+    <div class="loading-bar"><div class="loading-bar-fill" id="loading-bar-fill"></div></div>
+    <div class="loading-percent" id="loading-percent">INITIALIZING · 0%</div>
+  </div>
+
+  <div class="noise-overlay"></div>
+  <div class="grid-overlay"></div>
+  <div class="cursor-glow" id="cursor-glow"></div>
+  <div class="cursor-dot" id="cursor-dot"></div>
+
+  <div id="progress-bar"></div>
+
+  <header>
+    <nav class="glass glow-border">
+      <a href="#home" class="logo">DARK<span class="text-gradient">ROOT</span></a>
+      <ul class="nav-links" id="nav-links"></ul>
+      <div class="nav-actions">
+        <a href="#careers" class="search-btn"><i class="fa-solid fa-briefcase"></i> Careers</a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="glass-strong" id="mobile-menu"></div>
+
+  <main>
+    <!-- HERO -->
+    <section id="home">
+      <canvas id="hero-canvas"></canvas>
+      <div class="mesh-glow"></div>
+      <div class="scanlines"></div>
+      <div class="floating-icons" id="floating-icons"></div>
+      <div class="hero-inner">
+        <h1 class="hero-title" id="hero-title"></h1>
+        <p class="hero-subtitle" id="hero-subtitle"></p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">Explore</a>
+          <a href="#careers" class="btn btn-outline">Join DarkRoot</a>
+        </div>
+      </div>
+      <a href="#about" class="scroll-indicator" aria-label="Scroll down"><div class="mouse"></div>SCROLL</a>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">About Us</p>
+        <h2>Mission, vision & values</h2>
+      </div>
+      <div class="container">
+        <div class="about-top">
+          <div class="glass value-card reveal">
+            <p class="eyebrow">Mission</p>
+            <h3 style="margin-top:10px;">What drives us</h3>
+            <p id="about-mission" style="margin-top:14px;"></p>
+          </div>
+          <div class="glass value-card reveal">
+            <p class="eyebrow">Vision</p>
+            <h3 style="margin-top:10px;">Where we're going</h3>
+            <p id="about-vision" style="margin-top:14px;"></p>
+          </div>
+        </div>
+
+        <div class="about-top" id="values-grid" style="margin-bottom:70px;"></div>
+
+        <div class="timeline-wrap">
+          <div class="timeline-line">
+            <div class="timeline-progress" id="about-timeline-progress"></div>
+            <div class="timeline-items" id="about-timeline-items"></div>
+          </div>
+        </div>
+
+        <div class="stats-grid" id="about-stats"></div>
+      </div>
+    </section>
+
+    <!-- DEPARTMENTS -->
+    <section id="departments" class="section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">What We Do</p>
+        <h2>Departments</h2>
+      </div>
+      <div class="container">
+        <div class="dept-grid" id="dept-grid"></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Our Work</p>
+        <h2>Featured Projects</h2>
+      </div>
+      <div class="container">
+        <div class="projects-grid" id="projects-grid"></div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team" class="section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">The People</p>
+        <h2>Meet the Team</h2>
+      </div>
+      <div class="container">
+        <div class="team-grid" id="team-grid"></div>
+      </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section class="section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Stack</p>
+        <h2>Technology we build with</h2>
+      </div>
+      <div class="container">
+        <div class="tech-grid" id="tech-grid"></div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Behind the Scenes</p>
+        <h2>Gallery</h2>
+      </div>
+      <div class="container">
+        <div class="gallery-grid" id="gallery-grid"></div>
+      </div>
+    </section>
+
+    <!-- CAREERS -->
+    <section id="careers" class="section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Join Us</p>
+        <h2>Careers at DarkRoot</h2>
+        <p id="careers-intro"></p>
+      </div>
+      <div class="container">
+        <div class="careers-grid">
+          <div class="careers-block reveal">
+            <h3>How hiring works</h3>
+            <div id="careers-steps"></div>
+          </div>
+          <div class="careers-block reveal">
+            <h3>Benefits</h3>
+            <div class="benefits-grid" id="careers-benefits"></div>
+          </div>
+        </div>
+
+        <div class="positions-list" id="positions-list"></div>
+
+        <form class="glass apply-form reveal" id="apply-form">
+          <h3>Apply now</h3>
+          <div class="field" id="field-apply-name">
+            <input type="text" id="apply-name" />
+            <label for="apply-name">Full name</label>
+          </div>
+          <div class="field" id="field-apply-email">
+            <input type="email" id="apply-email" />
+            <label for="apply-email">Email address</label>
+          </div>
+          <div class="field" id="field-apply-role">
+            <select id="apply-role">
+              <option value="">Select a position…</option>
+            </select>
+          </div>
+          <div class="file-drop" id="file-drop">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Click to upload your resume (PDF)
+            <input type="file" id="resume-upload" accept=".pdf" style="display:none;" />
+          </div>
+          <div class="field" id="field-apply-message">
+            <textarea id="apply-message" rows="4"></textarea>
+            <label for="apply-message">Tell us about yourself</label>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Submit Application</button>
+          <div class="form-success" id="apply-success">
+            <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+            <p style="font-family: var(--font-display); font-weight:600;">Application received</p>
+            <p style="margin-top:6px; font-size:0.85rem; color:var(--muted);">We'll be in touch soon.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Questions</p>
+        <h2>Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-list" id="faq-list"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Get In Touch</p>
+        <h2>Let's build something together</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="glass contact-info reveal">
+          <div>
+            <h3>Reach out</h3>
+            <div class="contact-row"><i class="fa-solid fa-envelope"></i> <a href="#" id="contact-email"></a></div>
+            <div class="contact-row"><i class="fa-brands fa-discord"></i> <a href="#" id="contact-discord" target="_blank" rel="noreferrer">Join our Discord</a></div>
+            <div class="contact-row"><i class="fa-brands fa-github"></i> <a href="#" id="contact-github" target="_blank" rel="noreferrer">GitHub</a></div>
+            <div class="contact-row"><i class="fa-brands fa-linkedin"></i> <a href="#" id="contact-linkedin" target="_blank" rel="noreferrer">LinkedIn</a></div>
+            <div class="contact-row"><i class="fa-solid fa-location-dot"></i> <span id="contact-location"></span></div>
+          </div>
+          <div class="contact-map">
+            <canvas class="contact-map-canvas" id="map-canvas"></canvas>
+          </div>
+        </div>
+        <form class="glass contact-form reveal" id="contact-form">
+          <div class="field" id="field-name">
+            <input type="text" id="input-name" />
+            <label for="input-name">Your name</label>
+            <p class="field-error" id="error-name" style="display:none;"></p>
+          </div>
+          <div class="field" id="field-email">
+            <input type="email" id="input-email" />
+            <label for="input-email">Your email</label>
+            <p class="field-error" id="error-email" style="display:none;"></p>
+          </div>
+          <div class="field" id="field-message">
+            <textarea id="input-message" rows="4"></textarea>
+            <label for="input-message">Your message</label>
+            <p class="field-error" id="error-message" style="display:none;"></p>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Send message</button>
+          <div class="form-success" id="form-success">
+            <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+            <p style="font-family: var(--font-display); font-weight:600;">Message sent</p>
+            <p style="margin-top:6px; font-size:0.85rem; color:var(--muted);">Thanks for reaching out — we'll reply soon.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+    <div class="footer-logo">DARK<span class="text-gradient">ROOT</span></div>
+    <div class="newsletter">
+      <input type="email" placeholder="Subscribe to our newsletter" id="newsletter-input" />
+      <button class="btn btn-primary" id="newsletter-btn">Subscribe</button>
+    </div>
+    <ul class="footer-links" id="footer-links"></ul>
+    <div class="footer-socials" id="footer-socials"></div>
+    <p class="footer-copy" id="footer-copy"></p>
+  </footer>
+
+  <!-- PROJECT PREVIEW MODAL -->
+  <div class="modal-overlay" id="project-modal">
+    <div class="glass-strong modal-box">
+      <div class="modal-thumb">
+        <img id="modal-image" src="" alt="" />
+        <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <h3 id="modal-title"></h3>
+        <p id="modal-description"></p>
+        <div class="project-tags" id="modal-tags"></div>
+        <div class="modal-actions">
+          <a href="#" id="modal-demo" target="_blank" rel="noreferrer" class="btn btn-primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+          <a href="#" id="modal-github" target="_blank" rel="noreferrer" class="btn btn-outline"><i class="fa-brands fa-github"></i> GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
