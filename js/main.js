@@ -440,6 +440,12 @@ function initGallery() {
 function initCareers() {
   document.getElementById('careers-intro').textContent = CONFIG.careers.intro;
 
+  const emailNote = document.getElementById('apply-email-note');
+  if (emailNote) {
+    emailNote.textContent = CONFIG.brand.email;
+    emailNote.href = `mailto:${CONFIG.brand.email}`;
+  }
+
   document.getElementById('careers-steps').innerHTML = CONFIG.careers.timeline
     .map((s) => `<div class="careers-step"><span class="step-num">${s.step.split('.')[0]}</span><div><strong style="font-family:var(--font-accent); font-size:0.9rem;">${s.step.split('. ')[1]}</strong><p>${s.text}</p></div></div>`)
     .join('');
@@ -483,17 +489,6 @@ function initCareers() {
     input.addEventListener('blur', () => field.classList.toggle('active', input.value.length > 0));
   });
 
-  // Resume upload UI
-  const fileDrop = document.getElementById('file-drop');
-  const fileInput = document.getElementById('resume-upload');
-  fileDrop.addEventListener('click', () => fileInput.click());
-  fileInput.addEventListener('change', () => {
-    if (fileInput.files.length) {
-      fileDrop.classList.add('has-file');
-      fileDrop.innerHTML = `<i class="fa-solid fa-file-circle-check"></i> ${fileInput.files[0].name}`;
-    }
-  });
-
   const applyForm = document.getElementById('apply-form');
   applyForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -511,8 +506,6 @@ function initCareers() {
         if (res.ok) {
           document.getElementById('apply-success').classList.add('show');
           applyForm.reset();
-          fileDrop.classList.remove('has-file');
-          fileDrop.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Click to upload your resume (PDF)`;
           setTimeout(() => document.getElementById('apply-success').classList.remove('show'), 4000);
         } else {
           alert('Something went wrong submitting your application. Please try again.');
