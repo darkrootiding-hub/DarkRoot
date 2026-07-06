@@ -191,14 +191,14 @@
               <option value="">Select a position…</option>
             </select>
           </div>
-          <div class="file-drop" id="file-drop">
-            <i class="fa-solid fa-cloud-arrow-up"></i> Click to upload your resume (PDF)
-            <input type="file" id="resume-upload" name="resume" accept=".pdf" style="display:none;" />
-          </div>
           <div class="field" id="field-apply-message">
             <textarea id="apply-message" name="message" rows="4"></textarea>
             <label for="apply-message">Tell us about yourself</label>
           </div>
+          <p style="font-size:0.78rem; color: var(--muted); font-family: var(--font-accent); margin: -8px 0 20px;">
+            No resume upload yet — after applying, please email your resume to
+            <a href="mailto:" id="apply-email-note" style="color: var(--blue);"></a>.
+          </p>
           <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Submit Application</button>
           <div class="form-success" id="apply-success">
             <div class="success-icon"><i class="fa-solid fa-check"></i></div>
