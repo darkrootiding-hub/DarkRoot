@@ -177,25 +177,26 @@
 
         <form class="glass apply-form reveal" id="apply-form">
           <h3>Apply now</h3>
+          <input type="hidden" name="_subject" value="New job application — DarkRoot" />
           <div class="field" id="field-apply-name">
-            <input type="text" id="apply-name" />
+            <input type="text" id="apply-name" name="name" />
             <label for="apply-name">Full name</label>
           </div>
           <div class="field" id="field-apply-email">
-            <input type="email" id="apply-email" />
+            <input type="email" id="apply-email" name="email" />
             <label for="apply-email">Email address</label>
           </div>
           <div class="field" id="field-apply-role">
-            <select id="apply-role">
+            <select id="apply-role" name="position">
               <option value="">Select a position…</option>
             </select>
           </div>
           <div class="file-drop" id="file-drop">
             <i class="fa-solid fa-cloud-arrow-up"></i> Click to upload your resume (PDF)
-            <input type="file" id="resume-upload" accept=".pdf" style="display:none;" />
+            <input type="file" id="resume-upload" name="resume" accept=".pdf" style="display:none;" />
           </div>
           <div class="field" id="field-apply-message">
-            <textarea id="apply-message" rows="4"></textarea>
+            <textarea id="apply-message" name="message" rows="4"></textarea>
             <label for="apply-message">Tell us about yourself</label>
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Submit Application</button>
@@ -238,18 +239,19 @@
           </div>
         </div>
         <form class="glass contact-form reveal" id="contact-form">
+          <input type="hidden" name="_subject" value="New message from DarkRoot website" />
           <div class="field" id="field-name">
-            <input type="text" id="input-name" />
+            <input type="text" id="input-name" name="name" />
             <label for="input-name">Your name</label>
             <p class="field-error" id="error-name" style="display:none;"></p>
           </div>
           <div class="field" id="field-email">
-            <input type="email" id="input-email" />
+            <input type="email" id="input-email" name="email" />
             <label for="input-email">Your email</label>
             <p class="field-error" id="error-email" style="display:none;"></p>
           </div>
           <div class="field" id="field-message">
-            <textarea id="input-message" rows="4"></textarea>
+            <textarea id="input-message" name="message" rows="4"></textarea>
             <label for="input-message">Your message</label>
             <p class="field-error" id="error-message" style="display:none;"></p>
           </div>
